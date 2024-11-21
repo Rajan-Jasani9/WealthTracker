@@ -14,3 +14,25 @@ class UserDetails(AbstractUser):
   def save(self, *args, **kwargs):
     self.updated_at = timezone.now()
     super().save(*args, **kwargs)
+
+
+class UserToken(models.Model):
+  """
+  Model representing a user token.
+
+  Inherits from the CommonInfo abstract base model for common fields.
+  """
+
+  user = models.ForeignKey(UserDetails,
+                           related_name="user",
+                           on_delete=models.CASCADE,
+                           null=True,
+                           blank=True,
+                           db_index=True)
+  token = models.CharField(null=True, blank=True, max_length=500)
+
+  def __str__(self):
+    return str(self.user) + ' - UserTokenID - ' + str(self.id)
+
+  class Meta:
+    db_table = "user_tokens"
