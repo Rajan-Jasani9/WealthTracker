@@ -134,3 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.UserDetails'
 
 SECRET_KEY = "EHrGIFwZ8imt5-rr64MKYm9s6WvYPW7nmXvNg1v9dXvseyYdtNRSVorw1zxBGt0XHwwhCvwHAaVdIhoODx_ZJw"
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#     ]
+# }
