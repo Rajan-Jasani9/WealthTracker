@@ -1,4 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.utils import timezone
+
+class CommonInfo(models.Model):
+  """
+  Abstract base model providing common fields for other models.
+  """
+  is_delete = models.BooleanField(default=False, db_index=True)
+  deleted_at = models.DateTimeField(null=True, blank=True)
+  created_at = models.DateTimeField(null=True, auto_now_add=True)
+  updated_at = models.DateTimeField(null=True, auto_now=True)
+
+  class Meta:
+      abstract = True
 
 
 class DebtType(models.TextChoices):
@@ -21,7 +35,7 @@ class DebtStatus(models.TextChoices):
 # Create your models here.
 
 
-class Lender(models.Model):
+class Lender(CommonInfo):
 
   name = models.CharField(max_length=255)
   is_institution = models.BooleanField(default=False)
@@ -29,7 +43,7 @@ class Lender(models.Model):
   email = models.EmailField(blank=True)
 
 
-class Debt(models.Model):
+class Debt(CommonInfo):
   name = models.CharField(max_length=255)
   debt_type = models.CharField(
       max_length=50,
